@@ -1,6 +1,11 @@
 package com.codenation.errorcenter.entity;
 
+import net.minidev.json.annotate.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,13 +19,16 @@ public class User {
 
     @NotNull
     @Size(max = 50)
+    @Column(unique = true)
     private String userName;
 
     @NotNull
     @Size(max = 100)
+    @Column(unique = true)
     private String email;
 
     @NotNull
+    @NotEmpty
     private String password;
 
     public Long getId() {
@@ -52,6 +60,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 }

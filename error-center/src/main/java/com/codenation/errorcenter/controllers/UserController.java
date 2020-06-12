@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("v1")
 public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
 
-	@PostMapping
+	@PostMapping(path = "user")
 	public ResponseEntity<User> create(@RequestBody User user) {
 		return new ResponseEntity<User>(this.userService.save(user), HttpStatus.CREATED);
 	}

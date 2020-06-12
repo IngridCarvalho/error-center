@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/error-log")
+@RequestMapping("v1")
 public class ErrorLogController {
 
 	@Autowired
 	private ErrorLogServiceImpl errorLogService;
 
-	@GetMapping
+	@GetMapping(path = "error-log")
 	public List<ErrorLog> findAll(Pageable pageable) {
 		return errorLogService.findAll(pageable);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping(path = "error-log/{id}")
 	public ResponseEntity<ErrorLog> findById(@PathVariable("id") Long id) {
 		this.verifyIfErrorLogExists(id);
 		return new ResponseEntity<ErrorLog>(errorLogService.findById(id).get(), HttpStatus.OK);
 	}
 
-	@PostMapping
+	@PostMapping(path = "error-log")
 	public ResponseEntity<ErrorLog> create(@RequestBody ErrorLog errorLog) {
 		return new ResponseEntity<ErrorLog>(errorLogService.save(errorLog), HttpStatus.CREATED);
 	}

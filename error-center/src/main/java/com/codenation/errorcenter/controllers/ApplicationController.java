@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/application")
+@RequestMapping("v1")
 public class ApplicationController {
 
 	@Autowired
 	private ApplicationServiceImpl applicationService;
 
-	@PostMapping
+	@PostMapping(path = "application")
 	public ResponseEntity<Application> create(@RequestBody Application application) {
 		return new ResponseEntity<Application>(this.applicationService.save(application), HttpStatus.CREATED);
 	}
 
-	@GetMapping
+	@GetMapping(path = "application")
 	public ResponseEntity<List<Application>> findAll() {
 		return new ResponseEntity<List<Application>>(this.applicationService.findAll(), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "application/{id}")
 	public ResponseEntity<Application> findById(@PathVariable("id") Long id) {
 		this.verifyIfApplicationExists(id);
 		return new ResponseEntity<Application>(this.applicationService.findById(id).get(), HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping(path = "application/{id}")
 	public ResponseEntity<Application> update(@RequestBody Application application) {
 		return new ResponseEntity<Application>(this.applicationService.save(application), HttpStatus.ACCEPTED);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(path = "application/{id}")
 	public void delete(@PathVariable("id") Long id) {
 		this.verifyIfApplicationExists(id);
 		this.applicationService.delete(id);
