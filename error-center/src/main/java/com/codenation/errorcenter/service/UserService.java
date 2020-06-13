@@ -4,7 +4,7 @@ import com.codenation.errorcenter.entity.User;
 
 public interface UserService {
 
-	User findByUserName(String userName);
+	User findByUsername(String username);
 
 	User save(User user);
 
