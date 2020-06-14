@@ -4,6 +4,7 @@ import com.codenation.errorcenter.enumerator.Level;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -16,10 +17,12 @@ public class ErrorLog {
     private Long id;
 
     @NotNull
+    @NotEmpty(message = "Description is require")
     @Size(max = 200)
     private String description;
 
     @NotNull
+    @NotEmpty(message = "Description is require")
     @Size(max = 255)
     private String eventLog;
 

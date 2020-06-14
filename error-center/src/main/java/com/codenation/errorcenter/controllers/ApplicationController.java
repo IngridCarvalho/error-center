@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class ApplicationController {
 	private ApplicationServiceImpl applicationService;
 
 	@PostMapping(path = "application")
-	public ResponseEntity<Application> create(@RequestBody Application application) {
+	public ResponseEntity<Application> create(@Valid @RequestBody Application application) {
 		return new ResponseEntity<Application>(this.applicationService.save(application), HttpStatus.CREATED);
 	}
 
@@ -34,7 +35,7 @@ public class ApplicationController {
 	}
 
 	@PutMapping(path = "application/{id}")
-	public ResponseEntity<Application> update(@RequestBody Application application) {
+	public ResponseEntity<Application> update(@Valid @RequestBody Application application) {
 		return new ResponseEntity<Application>(this.applicationService.save(application), HttpStatus.ACCEPTED);
 	}
 
