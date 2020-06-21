@@ -4,24 +4,24 @@ import com.codenation.errorcenter.entity.ErrorLog;
 import com.codenation.errorcenter.error.ResourceNotFoundException;
 import com.codenation.errorcenter.impl.ErrorLogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000/", maxAge = 3600)
 @RestController
-@RequestMapping("v1")
+@RequestMapping("api/v1")
 public class ErrorLogController {
 
 	@Autowired
 	private ErrorLogServiceImpl errorLogService;
 
 	@GetMapping(path = "error-log")
-	public List<ErrorLog> findAll(Pageable pageable) {
+	public Page<ErrorLog> findAll(Pageable pageable) {
 		return errorLogService.findAll(pageable);
 	}
 

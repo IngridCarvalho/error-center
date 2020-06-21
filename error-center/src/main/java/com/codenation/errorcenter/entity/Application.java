@@ -21,10 +21,6 @@ public class Application {
     @OneToMany(mappedBy = "application")
     private List<ErrorLog> errorLogs;
 
-    public Long getId() {
-        return id;
-    }
-
     public String getDescription() {
         return description;
     }

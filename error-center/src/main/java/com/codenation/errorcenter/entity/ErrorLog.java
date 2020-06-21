@@ -1,13 +1,12 @@
 package com.codenation.errorcenter.entity;
 
 import com.codenation.errorcenter.enumerator.Level;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class ErrorLog {
@@ -22,18 +21,13 @@ public class ErrorLog {
     private String description;
 
     @NotNull
-    @NotEmpty(message = "Description is require")
-    @Size(max = 255)
-    private String eventLog;
-
-    @CreatedDate
-    private LocalDateTime eventData;
-
-    @NotNull
     private Integer quantity;
 
     @Enumerated(EnumType.STRING)
     private Level level;
+
+    @OneToMany(mappedBy = "errorLog")
+    private List<EventLog> eventLogs;
 
     @ManyToOne
     private Application application;
@@ -42,32 +36,12 @@ public class ErrorLog {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getEventLog() {
-        return eventLog;
-    }
-
-    public void setEventLog(String eventLog) {
-        this.eventLog = eventLog;
-    }
-
-    public LocalDateTime getEventData() {
-        return eventData;
-    }
-
-    public void setEventData(LocalDateTime eventData) {
-        this.eventData = eventData;
     }
 
     public Integer getQuantity() {
@@ -92,5 +66,13 @@ public class ErrorLog {
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public List<EventLog> getEventLogs() {
+        return eventLogs;
+    }
+
+    public void setEventLogs(List<EventLog> eventLogs) {
+        this.eventLogs = eventLogs;
     }
 }

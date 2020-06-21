@@ -4,6 +4,7 @@ import com.codenation.errorcenter.entity.ErrorLog;
 import com.codenation.errorcenter.repository.ErrorLogRepository;
 import com.codenation.errorcenter.service.ErrorLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class ErrorLogServiceImpl implements ErrorLogService {
 	private ErrorLogRepository errorLogRepository;
 
 	@Override
-	public List<ErrorLog> findAll(Pageable pageable) {
-		return this.errorLogRepository.findAll(pageable).getContent();
+	public Page<ErrorLog> findAll(Pageable pageable) {
+		return this.errorLogRepository.findAll(pageable);
 	}
 
 	@Override
