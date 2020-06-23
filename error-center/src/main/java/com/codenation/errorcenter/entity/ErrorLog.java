@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ErrorLog {
@@ -27,7 +27,7 @@ public class ErrorLog {
     private Level level;
 
     @OneToMany(mappedBy = "errorLog")
-    private List<EventLog> eventLogs;
+    private Set<EventLog> eventLogs;
 
     @ManyToOne
     private Application application;
@@ -68,11 +68,11 @@ public class ErrorLog {
         this.application = application;
     }
 
-    public List<EventLog> getEventLogs() {
+    public Set<EventLog> getEventLogs() {
         return eventLogs;
     }
 
-    public void setEventLogs(List<EventLog> eventLogs) {
+    public void setEventLogs(Set<EventLog> eventLogs) {
         this.eventLogs = eventLogs;
     }
 }

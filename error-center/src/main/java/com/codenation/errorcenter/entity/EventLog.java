@@ -1,6 +1,7 @@
 package com.codenation.errorcenter.entity;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,11 +20,11 @@ public class EventLog {
 	@Size(max = 255)
 	private String log;
 
-	@CreatedDate
-	@Column(name = "created_date", nullable = false, updatable = false)
+	@LastModifiedDate
 	private LocalDateTime eventData;
 
 	@ManyToOne
+	@JoinColumn(name="error_log_id", referencedColumnName="id")
 	private ErrorLog errorLog;
 
 	public Long getId() {
