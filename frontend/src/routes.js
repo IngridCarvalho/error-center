@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Logon from './pages/Logon';
 import Home from './pages/Home';
 import Users from './pages/Users';
@@ -8,7 +8,6 @@ import ErrorsLog from './pages/ErrorsLog';
 
 function Routes() {
     return(
-        <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/login" component={Logon} />
@@ -16,7 +15,6 @@ function Routes() {
                 <Route path="/applications" component={Applications} />
                 <Route path="/errors-log" component={ErrorsLog} />
             </Switch>
-        </BrowserRouter>
     )
 }
 

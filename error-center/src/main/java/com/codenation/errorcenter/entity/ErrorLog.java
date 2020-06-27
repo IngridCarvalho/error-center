@@ -1,11 +1,13 @@
 package com.codenation.errorcenter.entity;
 
 import com.codenation.errorcenter.enumerator.Level;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,8 +28,9 @@ public class ErrorLog {
     @Enumerated(EnumType.STRING)
     private Level level;
 
-    @OneToMany(mappedBy = "errorLog")
-    private Set<EventLog> eventLogs;
+    @OneToMany(mappedBy = "errorLog", orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<EventLog> eventLogs;
 
     @ManyToOne
     private Application application;
@@ -68,11 +71,11 @@ public class ErrorLog {
         this.application = application;
     }
 
-    public Set<EventLog> getEventLogs() {
+    public List<EventLog> getEventLogs() {
         return eventLogs;
     }
 
-    public void setEventLogs(Set<EventLog> eventLogs) {
+    public void setEventLogs(List<EventLog> eventLogs) {
         this.eventLogs = eventLogs;
     }
 }

@@ -24,7 +24,6 @@ public class EventLog {
 	private LocalDateTime eventData;
 
 	@ManyToOne
-	@JoinColumn(name="error_log_id", referencedColumnName="id")
 	private ErrorLog errorLog;
 
 	public Long getId() {
